@@ -1,10 +1,10 @@
-data "aws_ami" "joindevops" {
-  owners           = ["973714476881"]
+data "aws_ami" "openvpn" {
+  owners           = ["679593333241"]
   most_recent      = true
 
   filter {
     name   = "name"
-    values = ["RHEL-9-DevOps-Practice"]
+    values = ["OpenVPN Access Server Community Image-fe8020db-*"]
   }
 
   filter {
@@ -18,8 +18,9 @@ data "aws_ami" "joindevops" {
   }
 }
 
+
 data "aws_ssm_parameter" "vpn_sg_id" {
-   name = "/${var.project}/${var.environment}/vpn_sg_id"
+  name = "/${var.project}/${var.environment}/vpn_sg_id"
 }
 
 data "aws_ssm_parameter" "public_subnet_ids" {

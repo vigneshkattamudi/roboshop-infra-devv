@@ -4,18 +4,18 @@ resource "aws_key_pair" "openvpn" {
 }
 
 resource "aws_instance" "vpn" {
-  ami           = local.ami_id
-  instance_type = var.instance_type
+  ami                    = local.ami_id
+  instance_type          = var.instance_type
   vpc_security_group_ids = [local.vpn_sg_id]
-  subnet_id = local.public_subnet_id
+  subnet_id              = local.public_subnet_id
   #key_name = "daws-84s" # make sure this key exist in AWS
-  key_name = aws_key_pair.openvpn.key_name
+  key_name  = aws_key_pair.openvpn.key_name
   user_data = file("openvpn.sh")
 
   tags = merge(
     local.common_tags,
     {
-        Name = "${var.project}-${var.environment}-vpn"
+      Name = "${var.project}-${var.environment}-vpn"
     }
   )
 }
